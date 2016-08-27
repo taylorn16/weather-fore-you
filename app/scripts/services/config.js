@@ -23,13 +23,13 @@ angular.module('weatherForeYouApp')
     cityIdAPI: 'http://chathamweatherapi.azurewebsites.net/api/cities/',
 
     // Increasing cloud code values denote increasing cloudiness
-    cloudCodes: {
+    CLOUD_CODES: {
         '10': 'clear skies',
         '20': 'partly cloudy',
         '30': 'cloud cover',
         '40': 'dense clouds'
     },
-    iconCodes: {
+    ICON_CODES: {
       night: {
         '10': 'C',
         '20': 'I',

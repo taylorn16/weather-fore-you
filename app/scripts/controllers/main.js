@@ -9,8 +9,8 @@
  */
 angular.module('weatherForeYouApp')
   .controller('MainCtrl',
-  ['forecastService', '$log', 'cityService', 'config',
-  function (forecastService, $log, cityService, config) {
+  ['forecastService', '$log', 'cityService', 'config', 'weatherCodeService',
+  function (forecastService, $log, cityService, config, weatherCodeService) {
     var vm = this;
 
     vm.cityName = config.cityDefaults.name;
@@ -30,6 +30,8 @@ angular.module('weatherForeYouApp')
         vm.weather.apparentTemperature = weatherData.apparentTemperature;
         vm.weather.humidity = weatherData.humidity * 100;
         vm.weather.pressure = weatherData.pressure;
+        vm.weather.cloudCode = weatherCodeService.getCloudCode(weatherData.cloudCover);
+        vm.weather.iconCode = weatherCodeService.getIconCode(weatherData.cloudCover);
       });
 
   }]);
