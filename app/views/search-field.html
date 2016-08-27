@@ -1,0 +1,17 @@
+<form ng-controller="MainCtrl as main">
+  <div class="col-md-8 col-md-push-2 text-left">
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control input-lg"
+        placeholder="Enter your city"
+        ng-model="main.searchQuery"
+        ng-change="main.updateSearchResults()">
+
+      <ul>
+        <li ng-repeat="result in main.searchResults">
+          <a ng-href="#/" ng-click="main.updateCurrentWeatherById(result.id)">{{ result.name }}</a>
+        </li>
+      </ul>
+  </div>
+</form><!--.form-->

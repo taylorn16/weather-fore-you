@@ -2,14 +2,15 @@
   <div class="col-md-8">
     <div class="jumbotron">
       <h1 class="meteocon" data-icon="H"></h1>
-      <h2>Weather-Fore-You</h2>
-      <p>Hot 'n fresh weather forecasts served up daily.</p>
+      <h2>Weather Fore You</h2>
+      <p>Hot 'n' fresh weather forecasts served up daily.</p>
+
+      <div class="row" ng-include="'views/search-field.html'"></div>
+
     </div><!-- .jumbotron -->
   </div>
 
-  <div class="col-md-4" ng-include="'views/current-weather.html'">
-
-  </div>
+  <div class="col-md-4" ng-include="'views/current-weather.html'"></div>
 </div>
 
 

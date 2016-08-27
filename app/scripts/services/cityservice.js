@@ -46,7 +46,7 @@ angular.module('weatherForeYouApp')
         .then(function(predictions) {
           function getNameAndId(elem) {
             return {
-              description: elem.description,
+              name: elem.description,
               id: elem.place_id
             };
           };
