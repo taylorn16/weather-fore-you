@@ -22,5 +22,25 @@ angular.module('weatherForeYouApp')
     citySearchAPI: 'http://chathamweatherapi.azurewebsites.net/api/cities/search',
     cityIdAPI: 'http://chathamweatherapi.azurewebsites.net/api/cities/',
 
-    
+    // Increasing cloud code values denote increasing cloudiness
+    cloudCodes: {
+        '10': 'clear skies',
+        '20': 'partly cloudy',
+        '30': 'cloud cover',
+        '40': 'dense clouds'
+    },
+    iconCodes: {
+      night: {
+        '10': 'C',
+        '20': 'I',
+        '30': '5',
+        '40': '%'
+      },
+      day: {
+        '10': 'B',
+        '20': 'H',
+        '30': 'N',
+        '40': 'Y'
+      }
+    }
   });
