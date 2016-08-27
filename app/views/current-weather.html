@@ -1,0 +1,41 @@
+<div class="panel panel-primary" ng-controller="MainCtrl as main">
+  <div class="panel-body">
+    <span class="text-uppercase text-muted">Current Weather</span>
+    <h4><strong>{{ main.cityName }}</strong></h4>
+
+    <div class="row">
+      <div class="col-xs-6 text-center">
+        <span class="current-temp"><strong>{{ main.weather.temperature | number:0 }}</strong><span class="meteocon" data-icon="+"></span></span><br>
+      </div>
+      <div class="col-xs-6 text-center">
+        <span class="icon-xl meteocon" data-icon="{{ main.weather.iconCode }}"></span><br>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-6 text-center">
+        <span class="text-uppercase text-muted">real temp</span>
+      </div>
+      <div class="col-xs-6 text-center">
+        <span class="text-uppercase text-muted">{{ main.weather.cloudCode }}</span>
+      </div>
+    </div>
+
+    <br>
+
+    <p class="lead text-center text-uppercase">{{ main.weather.date | date:'dd MMM' }}</p>
+
+  </div><!--.panel-body-->
+
+  <ul class="list-group">
+    <li class="list-group-item">
+      Apparent Temp <span class="pull-right"><strong>{{ main.weather.apparentTemperature | number:0 }}<sup>o</sup></strong></span>
+    </li>
+    <li class="list-group-item">
+      Relative Humidity <span class="pull-right"><strong>{{ main.weather.humidity }}%</strong></span>
+    </li>
+    <li class="list-group-item">
+      Pressure <span class="pull-right"><strong>{{ main.weather.pressure | number:0 }} mbar</strong></span>
+    </li>
+  </ul>
+</div>

@@ -12,12 +12,8 @@ angular.module('weatherForeYouApp')
   function (config, $log, $http) {
 
     // Gets back all the data from the API server
-    function getForecastData(latitude, longitude, source) {
-      var forecastParams = {
-        latitude: latitude,
-        longitude: longitude,
-        source: source
-      };
+    function getForecastData(forecastParams) {
+      // see  services/config.js for forecastParams properties
 
       return $http({
         method: 'GET',
@@ -33,21 +29,20 @@ angular.module('weatherForeYouApp')
     };
 
     // Parses API data for only today's weather
-    this.getCurrentWeather = function(latitude, longitude, source) {
-
-      return getForecastData(latitude, longitude, source)
+    this.getCurrentWeather = function(forecastParams) {
+      return getForecastData(forecastParams)
         .then(function(data) {
           return data.currently;
         });
     }; // getCurrentWeather
 
     // Parses API data for a certain number of days
-    this.getForecast = function(latitude, longitude, source, numDays) {
+    this.getForecast = function(forecastParams, numDays) {
       // Some basic error-proofing in case users get creative
       if (numDays > 7) { numDays = 7;}
       if (numDays < 1) { numDays = 1;}
 
-      return getForecastData(latitude, longitude, source)
+      return getForecastData(forecastParams)
         .then(function(data) {
           return _.slice(data.futureForecasts, 0, numDays);
         });

@@ -9,23 +9,27 @@
  */
 angular.module('weatherForeYouApp')
   .controller('MainCtrl',
-  ['forecastService', '$log', 'cityService',
-  function (forecastService, $log, cityService) {
+  ['forecastService', '$log', 'cityService', 'config',
+  function (forecastService, $log, cityService, config) {
+    var vm = this;
 
-    forecastService.getForecast(39.64758, -75.68275, 'FORECAST_IO', 3).then(function(data) {
-      // $log.info(data);
-    });
+    vm.cityName = config.cityDefaults.name;
+    vm.weather = {
+      temperature: '-',
+      iconCode: '-',
+      apparentTemperature: '-',
+      humidity: '-',
+      date: new Date(),
+      cloudCode: '-',
+      pressure: '-'
+    };
 
-    forecastService.getCurrentWeather(39.64758, -75.68275, 'FORECAST_IO').then(function(data) {
-      // $log.info(data);
-    });
-
-    cityService.getSearchResultsFor('New York').then(function(data) {
-      // $log.info(data);
-    });
-
-    cityService.getLatAndLongById('ChIJ0RhONcBEFkcRv4pHdrW2a7Q').then(function(data) {
-      $log.info(data);
-    });
+    forecastService.getCurrentWeather(config.forecastParamDefaults)
+      .then(function(weatherData) {
+        vm.weather.temperature = weatherData.temperature;
+        vm.weather.apparentTemperature = weatherData.apparentTemperature;
+        vm.weather.humidity = weatherData.humidity * 100;
+        vm.weather.pressure = weatherData.pressure;
+      });
 
   }]);

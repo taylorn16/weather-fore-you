@@ -10,12 +10,17 @@
 angular.module('weatherForeYouApp')
   .constant('config', {
     forecastAPI: 'http://chathamweatherapi.azurewebsites.net/api/forecast',
-    forecastDefaults: {
-      latitude: 40.71278,
-      longitude: -74.00594,
+    forecastParamDefaults: {
+      latitude: 40.7127837,         // Defaults to NY City, NY
+      longitude: -74.0059413,
       source: 'FORECAST_IO'
     },
 
+    cityDefaults: {
+      name: "New York, NY, United States"
+    },
     citySearchAPI: 'http://chathamweatherapi.azurewebsites.net/api/cities/search',
-    cityIdAPI: 'http://chathamweatherapi.azurewebsites.net/api/cities/'
+    cityIdAPI: 'http://chathamweatherapi.azurewebsites.net/api/cities/',
+
+    
   });

@@ -3,31 +3,25 @@
     <div class="jumbotron">
       <h1 class="meteocon" data-icon="H"></h1>
       <h2>Weather-Fore-You</h2>
-      <p>Hot 'n fresh weather forecasts served up daily, for up to 7 days!</p>
+      <p>Hot 'n fresh weather forecasts served up daily.</p>
     </div><!-- .jumbotron -->
   </div>
 
-  <div class="col-md-4">
-    Forecast right now
+  <div class="col-md-4" ng-include="'views/current-weather.html'">
+
   </div>
 </div>
 
 
 
-<div class="row">
-  <div class="col-sm-9 col-sm-push-3">
-    <div class="well">
 
-    </div><!-- .ui-controls -->
-  </div>
-</div>
 
 
 <div class="row">
   <div class="col-sm-3">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title">Current Forecast</h3>
+        <h3 class="panel-title">7 Day Forecast</h3>
       </div>
       <div class="panel-body">
         Number of days <br>
