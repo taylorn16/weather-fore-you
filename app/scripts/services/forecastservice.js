@@ -8,8 +8,8 @@
  * Service in the weatherForeYouApp.
  */
 angular.module('weatherForeYouApp')
-  .service('forecastService', ['forecastAPI', '$log', '$http',
-  function (forecastAPI, $log, $http) {
+  .service('forecastService', ['config', '$log', '$http',
+  function (config, $log, $http) {
 
     // Gets back all the data from the API server
     function getForecastData(latitude, longitude, source) {
@@ -21,7 +21,7 @@ angular.module('weatherForeYouApp')
 
       return $http({
         method: 'GET',
-        url: forecastAPI,
+        url: config.forecastAPI,
         params: forecastParams
       })
         .then(function(response) {
@@ -39,7 +39,6 @@ angular.module('weatherForeYouApp')
         .then(function(data) {
           return data.currently;
         });
-
     }; // getCurrentWeather
 
     // Parses API data for a certain number of days
@@ -52,7 +51,6 @@ angular.module('weatherForeYouApp')
         .then(function(data) {
           return _.slice(data.futureForecasts, 0, numDays);
         });
-
     }; // getForecast()
 
   }]);
