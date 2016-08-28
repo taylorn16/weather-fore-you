@@ -15,7 +15,7 @@ angular.module('weatherForeYouApp')
     function getCitySearchData(name) {
       return $http({
         method: 'GET',
-        url: config.citySearchAPI,
+        url: config.CITIES.SEARCH_API_URL,
         params: {byName: name}
       })
         .then(function(response) {
@@ -30,7 +30,7 @@ angular.module('weatherForeYouApp')
     function getCityInfoById(id) {
       return $http({
         method: 'GET',
-        url: config.cityIdAPI + id
+        url: config.CITIES.ID_API_URL + id
       })
         .then(function(response) {
           return response.data.result;

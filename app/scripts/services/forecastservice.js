@@ -17,7 +17,7 @@ angular.module('weatherForeYouApp')
 
       return $http({
         method: 'GET',
-        url: config.forecastAPI,
+        url: config.FORECAST.API_URL,
         params: forecastParams
       })
         .then(function(response) {

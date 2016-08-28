@@ -48,7 +48,7 @@ angular.module('weatherForeYouApp')
     vm.searchQuery = 'New York, NY, United States';
 
     // Initially apply 'fake' defaults to the view to avoid blank spaces...
-    vm.cityName = config.cityDefaults.name;
+    vm.cityName = config.CITIES.DEFAULTS.name;
     vm.weather = {
       temperature: '-',
       iconCode: '-',
@@ -58,7 +58,7 @@ angular.module('weatherForeYouApp')
       cloudCode: '-',
       pressure: '-'
     };
-    vm.forecastParams = config.forecastParamDefaults;
+    vm.forecastParams = config.FORECAST.DEFAULTS;
 
     // ... and load real weather values from default location (NY)
     forecastService.getCurrentWeather(vm.forecastParams)

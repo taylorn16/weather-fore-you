@@ -25,7 +25,7 @@ angular.module('weatherForeYouApp')
     };
 
     this.getCloudCode = function(cloudCoverIndex) {
-      return config.CLOUD_CODES[getCloudLevel(cloudCoverIndex)];
+      return config.HUMAN_CODES.CLOUDS[getCloudLevel(cloudCoverIndex)];
     };
 
     this.getIconCode = function(cloudCoverIndex) {
@@ -33,9 +33,9 @@ angular.module('weatherForeYouApp')
           hours = (new Date()).getHours();
 
       if (hours >= 7 && hours <= 19) {
-        return config.ICON_CODES.day[cloudLevel];
+        return config.HUMAN_CODES.ICONS.DAY[cloudLevel];
       } else {
-        return config.ICON_CODES.night[cloudLevel];
+        return config.HUMAN_CODES.ICONS.NIGHT[cloudLevel];
       }
     };
 

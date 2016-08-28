@@ -36,8 +36,7 @@
         </div>
         <div class="col-xs-6">
           <select class="form-control">
-            <option value="FORECAST_IO">Forecast.io</option>
-            <option value="WORLD_WEATHER">World Weather</option>
+            <option ng-repeat="provider in config.FORECAST.PROVIDERS" value="{{ provider.code }}">{{ provider.name }}</option>
           </select>
         </div>
       </div>
