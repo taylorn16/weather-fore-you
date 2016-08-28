@@ -35,8 +35,8 @@
           </select>
         </div>
         <div class="col-xs-6">
-          <select class="form-control">
-            <option ng-repeat="provider in config.FORECAST.PROVIDERS" value="{{ provider.code }}">{{ provider.name }}</option>
+          <select class="form-control" ng-model="vm.forecastParams.source">
+            <option ng-repeat="provider in vm.providers" value="{{ provider.code }}">{{ provider.name }}</option>
           </select>
         </div>
       </div>

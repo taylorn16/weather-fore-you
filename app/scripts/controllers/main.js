@@ -59,6 +59,7 @@ angular.module('weatherForeYouApp')
       pressure: '-'
     };
     vm.forecastParams = config.FORECAST.DEFAULTS;
+    vm.providers = config.FORECAST.PROVIDERS;
 
     // ... and load real weather values from default location (NY)
     forecastService.getCurrentWeather(vm.forecastParams)
