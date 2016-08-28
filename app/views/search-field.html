@@ -13,15 +13,42 @@
           ng-model="vm.searchQuery"
           ng-change="vm.updateSearchResults()">
         <div class="input-group-btn">
-          <button class="btn btn-default" ng-show="vm.searchQuery" ng-click="">&times;</button>
+          <button class="btn btn-default" ng-show="vm.searchQuery" ng-click="vm.clearSearch()">&times;</button>
         </div>
       </div>
+    </div><!--.form-group-->
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-6 text-center text-muted text-uppercase">
+          <p><small>Forecast for</small></p>
+        </div>
+        <div class="col-xs-6 text-center text-muted text-uppercase">
+          <p><small>Forecast from</small></p>
+        </div>
+
+        <div class="col-xs-6">
+          <select class="form-control">
+            <option value="3">3 Days</option>
+            <option value="3">5 Days</option>
+            <option value="3">7 Days</option>
+          </select>
+        </div>
+        <div class="col-xs-6">
+          <select class="form-control">
+            <option value="FORECAST_IO">Forecast.io</option>
+            <option value="WORLD_WEATHER">World Weather</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div><!--.push-10-col-->
 
 
-      <ul>
-        <li ng-repeat="result in vm.searchResults">
-          <a ng-click="vm.updateCurrentWeatherByResult(result)">{{ result.name }}</a>
-        </li>
-      </ul>
-  </div>
 </form><!--.form-->
+
+<ul>
+  <li ng-repeat="result in vm.searchResults">
+    <a ng-click="vm.updateCurrentWeatherByResult(result)">{{ result.name }}</a>
+  </li>
+</ul>

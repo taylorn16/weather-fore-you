@@ -13,11 +13,7 @@ angular.module('weatherForeYouApp')
   function (forecastService, $log, cityService, config, weatherCodeService, $scope) {
     var vm = this;
 
-    // Set up search models...
-    vm.searchQuery = '';
-    vm.searchResults = [];
-
-    // ...and update the search results each time the search input is changed
+    // Update the search results each time the search input is changed
     vm.updateSearchResults = function() {
       if (vm.searchQuery) {
         cityService.getSearchResultsFor(vm.searchQuery)
@@ -25,6 +21,12 @@ angular.module('weatherForeYouApp')
             vm.searchResults = results;
         });
       }
+    };
+
+    // Function happens when a user clears their query to start over
+    vm.clearSearch = function() {
+      vm.searchQuery = '';
+      vm.searchResults = [];
     };
 
     // Function happens when a user clicks a search result from the city search api
@@ -40,6 +42,10 @@ angular.module('weatherForeYouApp')
         vm.forecastParams.longitude = location.longitude;
       });
     }; // updateCurrentWeatherByResult()
+
+    // Initialize search results and query
+    vm.clearSearch();
+    vm.searchQuery = 'New York, NY, United States';
 
     // Initially apply 'fake' defaults to the view to avoid blank spaces...
     vm.cityName = config.cityDefaults.name;
