@@ -13,6 +13,8 @@ angular.module('weatherForeYouApp')
   function (forecastService, $log, cityService, config, weatherCodeService, $scope) {
     var vm = this;
 
+    vm.loadingState = true;
+
     // Update the search results each time the search input is changed
     vm.updateSearchResults = function() {
       if (vm.searchQuery) {                 // Only use an API call if we have a real query
@@ -31,6 +33,7 @@ angular.module('weatherForeYouApp')
 
     // Function happens when a user clicks a search result from the city search api
     vm.updateCurrentWeatherByResult = function(result) {
+
       // Update city name & clear search results
       vm.cityName = result.name;
       vm.searchResults = [];
@@ -77,6 +80,7 @@ angular.module('weatherForeYouApp')
         cloudCode: weatherCodeService.getCloudCode(weatherData.cloudCover),
         pressure: weatherData.pressure
       };
+      vm.loadingState = false;
     };
 
     // Set up a $watch on the forecastParams and update current
@@ -86,6 +90,9 @@ angular.module('weatherForeYouApp')
         return vm.forecastParams;
       },
       function handleParamsChange(newParams, oldParams) {
+        // For a nice UI touch, bring up the loader overlay
+        vm.loadingState = true;
+
         forecastService.getCurrentWeather(vm.forecastParams)
           .then(function(weatherData) {
             vm.updateCurrentWeatherData(weatherData);

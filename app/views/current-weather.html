@@ -1,4 +1,4 @@
-<div class="panel panel-primary">
+<div class="panel panel-primary current-weather-panel">
   <div class="panel-body">
     <span class="text-uppercase text-muted">Weather Right Now</span>
     <h4><strong>{{ vm.cityName }}</strong></h4>
@@ -42,4 +42,6 @@
   <div class="panel-footer">
     <em>Forecast served from {{ vm.forecastParams.source|weatherSourceFilter }}</em>
   </div>
-</div>
+
+  <div class="loader-overlay" ng-show="vm.loadingState"></div>
+</div><!--.panel-->
