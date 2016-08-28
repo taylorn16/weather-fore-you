@@ -1,16 +1,26 @@
+<!-- inherits from MainCtrl -->
 <form>
-  <div class="col-md-8 col-md-push-2 text-left">
+  <div class="col-md-10 col-md-push-1 text-left">
     <div class="form-group">
-      <input
-        type="text"
-        class="form-control input-lg"
-        placeholder="Enter your city"
-        ng-model="main.searchQuery"
-        ng-change="main.updateSearchResults()">
+      <div class="input-group input-group-lg">
+        <div class="input-group-btn">
+          <button class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+        </div>
+        <input
+          type="text"
+          class="form-control input-lg"
+          placeholder="Enter your city"
+          ng-model="vm.searchQuery"
+          ng-change="vm.updateSearchResults()">
+        <div class="input-group-btn">
+          <button class="btn btn-default" ng-show="vm.searchQuery" ng-click="">&times;</button>
+        </div>
+      </div>
+
 
       <ul>
-        <li ng-repeat="result in main.searchResults">
-          <a ng-click="main.updateCurrentWeatherByResult(result)">{{ result.name }}</a>
+        <li ng-repeat="result in vm.searchResults">
+          <a ng-click="vm.updateCurrentWeatherByResult(result)">{{ result.name }}</a>
         </li>
       </ul>
   </div>
