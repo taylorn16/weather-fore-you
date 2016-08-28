@@ -15,7 +15,7 @@ angular.module('weatherForeYouApp')
 
     // Update the search results each time the search input is changed
     vm.updateSearchResults = function() {
-      if (vm.searchQuery) {
+      if (vm.searchQuery) {                 // Only use an API call if we have a real query
         cityService.getSearchResultsFor(vm.searchQuery)
           .then(function(results) {
             vm.searchResults = results;
@@ -46,7 +46,6 @@ angular.module('weatherForeYouApp')
     // Initialize search results and query
     vm.clearSearch();
     vm.searchQuery = 'New York, NY, United States';
-
     // Initially apply 'fake' defaults to the view to avoid blank spaces...
     vm.cityName = config.CITIES.DEFAULTS.name;
     vm.weather = {
@@ -60,7 +59,6 @@ angular.module('weatherForeYouApp')
     };
     vm.forecastParams = config.FORECAST.DEFAULTS;
     vm.providers = config.FORECAST.PROVIDERS;
-
     // ... and load real weather values from default location (NY)
     forecastService.getCurrentWeather(vm.forecastParams)
       .then(function(weatherData) {
@@ -93,7 +91,7 @@ angular.module('weatherForeYouApp')
             vm.updateCurrentWeatherData(weatherData);
         });
       },
-      true
+      true                          // This third argument causes deep object equality to be performed
     );
 
   }]);

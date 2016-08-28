@@ -1,10 +1,10 @@
 <!-- inherits from MainCtrl -->
 <form>
   <div class="col-md-10 col-md-push-1 text-left">
-    <div class="form-group">
+    <div class="form-group city-search-bar">
       <div class="input-group input-group-lg">
         <div class="input-group-btn">
-          <button class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+          <button class="btn btn-success" ng-click="vm.updateSearchResults()"><span class="glyphicon glyphicon-search"></span></button>
         </div>
         <input
           type="text"
@@ -16,6 +16,14 @@
           <button class="btn btn-default" ng-show="vm.searchQuery" ng-click="vm.clearSearch()">&times;</button>
         </div>
       </div>
+
+      <div class="list-group city-search-results">
+        <a ng-repeat="result in vm.searchResults"
+          ng-href="#/"
+          ng-click="vm.updateCurrentWeatherByResult(result)"
+          class="list-group-item">{{ result.name }}</a>
+      </div><!--.list-group-->
+
     </div><!--.form-group-->
 
     <div class="form-group">
@@ -45,9 +53,3 @@
 
 
 </form><!--.form-->
-
-<ul>
-  <li ng-repeat="result in vm.searchResults">
-    <a ng-click="vm.updateCurrentWeatherByResult(result)">{{ result.name }}</a>
-  </li>
-</ul>
