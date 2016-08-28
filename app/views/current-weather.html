@@ -23,7 +23,10 @@
 
     <br>
 
-    <p class="lead text-center text-uppercase">{{ vm.weather.date | date:'dd MMM' }}</p>
+    <p class="lead text-center text-uppercase">
+      <small>{{ vm.weather.date | date:'MMM' }}</small><br>
+      <strong>{{ vm.weather.date | date:'dd' }}</strong>
+    </p>
 
   </div><!--.panel-body-->
 

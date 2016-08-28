@@ -8,10 +8,6 @@
  * Controller of the weatherForeYouApp
  */
 angular.module('weatherForeYouApp')
-  .controller('AboutCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('AboutCtrl', ['$rootScope', function ($rootScope) {
+    $rootScope.page = 'about';
+  }]);

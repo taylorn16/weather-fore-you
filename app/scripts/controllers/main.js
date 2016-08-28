@@ -9,11 +9,11 @@
  */
 angular.module('weatherForeYouApp')
   .controller('MainCtrl',
-  ['forecastService', '$log', 'cityService', 'config', 'weatherCodeService', '$scope',
-  function (forecastService, $log, cityService, config, weatherCodeService, $scope) {
+  ['forecastService', '$log', 'cityService', 'config', 'weatherCodeService', '$scope', '$rootScope',
+  function (forecastService, $log, cityService, config, weatherCodeService, $scope, $rootScope) {
     var vm = this;
 
-    vm.loadingState = true;
+    $rootScope.page = 'forecasts';
 
     // Update the search results each time the search input is changed
     vm.updateSearchResults = function() {
@@ -47,6 +47,7 @@ angular.module('weatherForeYouApp')
     }; // updateCurrentWeatherByResult()
 
     // Initialize search results and query
+    vm.loadingState = true;
     vm.clearSearch();
     vm.searchQuery = 'New York, NY, United States';
     // Initially apply 'fake' defaults to the view to avoid blank spaces...
