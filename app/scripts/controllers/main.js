@@ -9,8 +9,8 @@
  */
 angular.module('weatherForeYouApp')
   .controller('MainCtrl',
-  ['forecastService', '$log', 'cityService', 'config', 'weatherCodeService',
-  function (forecastService, $log, cityService, config, weatherCodeService) {
+  ['forecastService', '$log', 'cityService', 'config', 'weatherCodeService', '$scope',
+  function (forecastService, $log, cityService, config, weatherCodeService, $scope) {
     var vm = this;
 
     // Set up search models
@@ -41,11 +41,12 @@ angular.module('weatherForeYouApp')
     // Initialize real weather values with defaults
     forecastService.getCurrentWeather(vm.forecastParams)
       .then(function(weatherData) {
-        vm.updateCurrentWeatherWithData(weatherData);
+        vm.updateCurrentWeatherData(weatherData);
     });
 
-    // Update all appropriate model values
-    vm.updateCurrentWeatherWithData = function(weatherData) {
+    // Update all appropriate model values with appropriate modifications
+    vm.updateCurrentWeatherData = function(weatherData) {
+      $log.info('update weather data called');
       vm.weather = {
         temperature: weatherData.temperature,
         iconCode: weatherCodeService.getIconCode(weatherData.cloudCover),
@@ -55,24 +56,33 @@ angular.module('weatherForeYouApp')
         cloudCode: weatherCodeService.getCloudCode(weatherData.cloudCover),
         pressure: weatherData.pressure
       };
-
-      return;
     };
 
-    vm.updateCurrentWeatherById = function(id) {
-      $log.info(vm.forecastParams);
-      cityService.getLatAndLongById(id).then(function(location) {
+    // Function happens when a user clicks a search result from the city search api
+    vm.updateCurrentWeatherByResult = function(result) {
+      // Update city name
+      vm.cityName = result.name;
+
+      // Update forecast location in the view model
+      cityService.getLatAndLongById(result.id).then(function(location) {
         vm.forecastParams.latitude = location.latitude;
         vm.forecastParams.longitude = location.longitude;
       });
-      $log.info(vm.forecastParams);
-      forecastService.getCurrentWeather(vm.forecastParams).then(function(weatherData) {
-        vm.updateCurrentWeatherWithData(weatherData);
-      });
+    }; // updateCurrentWeatherByResult()
 
-      return;
-    }; // updateCurrentWeatherById()
-
-
+    // Set up a watch on the forecastParams and update current
+    // weather block as necessary
+    $scope.$watch(
+      function watchForecastParams(scope) {
+        return vm.forecastParams;
+      },
+      function handleParamsChange(newParams, oldParams) {
+        forecastService.getCurrentWeather(vm.forecastParams)
+          .then(function(weatherData) {
+            vm.updateCurrentWeatherData(weatherData);
+        });
+      },
+      true
+    );
 
   }]);

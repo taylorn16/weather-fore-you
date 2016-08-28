@@ -1,4 +1,4 @@
-<form ng-controller="MainCtrl as main">
+<form>
   <div class="col-md-8 col-md-push-2 text-left">
     <div class="form-group">
       <input
@@ -10,7 +10,7 @@
 
       <ul>
         <li ng-repeat="result in main.searchResults">
-          <a ng-href="#/" ng-click="main.updateCurrentWeatherById(result.id)">{{ result.name }}</a>
+          <a ng-click="main.updateCurrentWeatherByResult(result)">{{ result.name }}</a>
         </li>
       </ul>
   </div>
