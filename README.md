@@ -1,7 +1,6 @@
-# weather-fore-you
+# Weather Fore You
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.15.1.
+This project was built as a front-end web development challenge for a candidate position at Chatham Financial.
 
 ## Build & development
 
