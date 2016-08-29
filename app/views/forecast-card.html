@@ -1,0 +1,23 @@
+<div class="panel panel-default forecast-card">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-3">
+        <p class="lead">
+          <strong>{{ vm.date | date:'EEE' }}</strong><br>
+          <small>{{ vm.date | date:'dd' }} {{ vm.date | date:'MMM' }}</small>
+        </p>
+      </div><!--.col-xs-2-->
+
+      <div class="col-xs-6 text-center">
+        <!--TODO: use icon code filter here -->
+        <span class="meteocon icon-lg" data-icon="H"></span>
+      </div><!--.col-xs-10-->
+
+      <div class="col-xs-3 text-right">
+        <span class="forecast-card--temp">
+          <strong>{{ vm.temperatureMax | number:0 }}</strong>/<strong>{{ vm.temperatureMin | number:0 }}</strong> <span class="meteocon" data-icon="+"></span>
+        </span>
+      </div><!--.col-xs-2-->
+    </div>
+  </div>
+</div><!--.forecast-card-->

@@ -19,100 +19,21 @@
 
 
 <div class="row">
-  <div class="col-sm-3">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">7 Day Forecast</h3>
-      </div>
-      <div class="panel-body">
-        Number of days <br>
-        Source <br>
-        Average temp? <br>
-      </div>
-    </div>
-  </div>
 
-  <div class="col-sm-9">
-    <div class="row">
+  <div class="col-md-7">
 
-      <div class="col-sm-3 weather-card">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <h4>Today <small>Aug 26</small></h4>
-            <h1 class="text-center meteocon" data-icon="H"></h1>
-            <p>
-              <strong>High:</strong> High Temp
-              <strong>Low:</strong> Low Temp
-            </p>
-          </div>
-        </div>
-      </div><!-- .weather-card -->
+    <h3>X-Day Forecast <small><a ng-href="#/">Switch to x-day</a></small></h3>
 
-      <div class="col-sm-3 weather-card">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <h4>Today <small>Aug 26</small></h4>
-            <h1 class="text-center meteocon" data-icon="H"></h1>
-            <p>
-              <strong>High:</strong> High Temp
-              <strong>Low:</strong> Low Temp
-            </p>
-          </div>
-        </div>
-      </div><!-- .weather-card -->
+    <forecast-card ng-repeat="day in vm.forecastDays" forecast="day"></forecast-card>
 
-      <div class="col-sm-3 weather-card">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <h4>Today <small>Aug 26</small></h4>
-            <h1 class="text-center meteocon" data-icon="H"></h1>
-            <p>
-              <strong>High:</strong> High Temp
-              <strong>Low:</strong> Low Temp
-            </p>
-          </div>
-        </div>
-      </div><!-- .weather-card -->
+  </div><!--.forecast-cards-->
 
-      <div class="col-sm-3 weather-card">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <h4>Today <small>Aug 26</small></h4>
-            <h1 class="text-center meteocon" data-icon="H"></h1>
-            <p>
-              <strong>High:</strong> High Temp
-              <strong>Low:</strong> Low Temp
-            </p>
-          </div>
-        </div>
-      </div><!-- .weather-card -->
+  <div class="col-md-5">
 
-      <div class="col-sm-3 weather-card">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <h4>Today <small>Aug 26</small></h4>
-            <h1 class="text-center meteocon" data-icon="H"></h1>
-            <p>
-              <strong>High:</strong> High Temp
-              <strong>Low:</strong> Low Temp
-            </p>
-          </div>
-        </div>
-      </div><!-- .weather-card -->
+    <h3>See the Temps</h3>
 
-      <div class="col-sm-3 weather-card">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <h4>Today <small>Aug 26</small></h4>
-            <h1 class="text-center meteocon" data-icon="H"></h1>
-            <p>
-              <strong>High:</strong> High Temp
-              <strong>Low:</strong> Low Temp
-            </p>
-          </div>
-        </div>
-      </div><!-- .weather-card -->
+    <!-- TODO: use angular charts to plot 7-day forecast highs and lows -->
 
-    </div><!--.row-->
-  </div>
-</div>
+  </div><!--.forecast-chart-->
+
+</div><!--.row-->

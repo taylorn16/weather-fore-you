@@ -46,6 +46,8 @@ angular.module('weatherForeYouApp')
       });
     }; // updateCurrentWeatherByResult()
 
+
+
     // Initialize search results and query
     vm.loadingState = true;
     vm.clearSearch();
@@ -68,6 +70,15 @@ angular.module('weatherForeYouApp')
       .then(function(weatherData) {
         vm.updateCurrentWeatherData(weatherData);
     });
+    // Init the vm's days of forecasting
+    vm.forecastDays = [];
+    // Default to 3-day forecast
+    forecastService.getForecast(vm.forecastParams, 3)
+      .then(function(forecastDays) {
+        vm.forecastDays = forecastDays;
+    });
+
+    // TODO: convert getIconCode and getCloudCode to filters
 
     // Update all appropriate model values with appropriate modifications
     // and parsings for units and for human-readable purposes
@@ -83,6 +94,8 @@ angular.module('weatherForeYouApp')
       };
       vm.loadingState = false;
     };
+
+
 
     // Set up a $watch on the forecastParams and update current
     // weather block as necessary

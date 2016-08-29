@@ -88,6 +88,10 @@ body {
   font-size: 400%;
 }
 
+.icon-lg {
+  font-size: 350%;
+}
+
 .city-search-bar {
   position: relative;
 }
@@ -113,4 +117,18 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.forecast-card .lead {
+  font-size: 2em;
+  margin-bottom: 0;
+}
+
+.forecast-card--temp {
+  font-size: 3em;
+}
+
+.forecast-card .lead small {
+  position: relative;
+  top: -0.5em;
 }

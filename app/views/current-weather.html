@@ -1,7 +1,9 @@
 <div class="panel panel-primary current-weather-panel">
+  <header class="panel-heading">
+    Weather Right Now
+  </header>
   <div class="panel-body">
-    <span class="text-uppercase text-muted">Weather Right Now</span>
-    <h4><strong>{{ vm.cityName }}</strong></h4>
+    <h4 class="text-center"><strong>{{ vm.cityName }}</strong></h4>
 
     <div class="row">
       <div class="col-xs-6 text-center">
@@ -32,7 +34,7 @@
 
   <ul class="list-group">
     <li class="list-group-item">
-      Apparent Temp <span class="pull-right"><strong>{{ vm.weather.apparentTemperature | number:0 }}<sup>o</sup></strong></span>
+      Feels Like <span class="pull-right"><strong>{{ vm.weather.apparentTemperature | number:0 }}<sup>o</sup></strong></span>
     </li>
     <li class="list-group-item">
       Relative Humidity <span class="pull-right"><strong>{{ vm.weather.humidity }}%</strong></span>
