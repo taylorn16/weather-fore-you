@@ -58,5 +58,17 @@ angular.module('weatherForeYouApp')
           '40': 'Y'
         }
       }
+    },
+
+    WEATHER: {
+      DEFAULTS: {
+        temperature: 0,
+        apparentTemperature: 0,
+        humidity: 0,
+        date: new Date(),
+        pressure: 0,
+        cloudCover: 0
+      }
     }
+
   });

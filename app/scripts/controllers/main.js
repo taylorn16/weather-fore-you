@@ -35,7 +35,7 @@ angular.module('weatherForeYouApp')
     vm.updateCurrentWeatherByResult = function(result) {
 
       // Update city name & clear search results
-      vm.cityName = result.name;
+      vm.location = result.name;
       vm.searchResults = [];
       vm.searchQuery = result.name;
 
@@ -46,45 +46,38 @@ angular.module('weatherForeYouApp')
       });
     }; // updateCurrentWeatherByResult()
 
-
-
-    // Initialize search results and query
-    vm.loadingState = true;
-    vm.clearSearch();
-    vm.searchQuery = 'New York, NY, United States';
-    // Initially apply 'fake' defaults to the view to avoid blank spaces...
-    vm.cityName = config.CITIES.DEFAULTS.name;
-    vm.weather = {
-      temperature: '-',
-      apparentTemperature: '-',
-      humidity: 0,
-      date: new Date(),
-      pressure: '-',
-      cloudCover: 0
-    };
-    vm.forecastParams = config.FORECAST.DEFAULTS;
-    vm.providers = config.FORECAST.PROVIDERS;
-    // ... and load real weather values from default location (NY)
-    forecastService.getCurrentWeather(vm.forecastParams)
-      .then(function(weatherData) {
-        vm.updateCurrentWeatherData(weatherData);
-    });
-    // Init the vm's days of forecasting
-    vm.forecastDays = [];
-    // Default to 3-day forecast
-    forecastService.getForecast(vm.forecastParams, 3)
-      .then(function(forecastDays) {
-        vm.forecastDays = forecastDays;
-    });
-
-    // TODO: convert getIconCode and getCloudCode to filters
-
     // Update all appropriate model values with appropriate modifications
     // and parsings for units and for human-readable purposes
     vm.updateCurrentWeatherData = function(weatherData) {
       vm.weather = weatherData;
       vm.loadingState = false;
     };
+
+    // Initialize search results and query
+    vm.loadingState = true;
+    vm.clearSearch();
+    vm.searchQuery = 'New York, NY, United States';
+
+    // Initially apply 'fake' defaults to the view to avoid blank spaces...
+    vm.location = config.CITIES.DEFAULTS.name;
+    vm.weather = config.WEATHER.DEFAULTS;
+    vm.forecastParams = config.FORECAST.DEFAULTS;
+    vm.providers = config.FORECAST.PROVIDERS;
+
+    // ... and then load up real weather values from default location
+    forecastService.getCurrentWeather(vm.forecastParams)
+      .then(function(weatherData) {
+        vm.updateCurrentWeatherData(weatherData);
+    });
+
+    // Init the vm's days of forecasting
+    // Default to 3-day forecast
+    vm.forecastDays = [];
+    vm.numDaysToForecast = 3;
+    forecastService.getForecast(vm.forecastParams, vm.numDaysToForecast)
+      .then(function(forecastDays) {
+        vm.forecastDays = forecastDays;
+    });
 
 
 
