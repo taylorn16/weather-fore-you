@@ -1,51 +1,56 @@
-<div class="row">
-  <div class="col-md-8">
-    <div class="jumbotron">
-      <h1 class="meteocon" data-icon="H"></h1>
-      <h2>Weather Fore You</h2>
-      <p>Hot 'n' fresh weather forecasts served up daily.</p>
+<div id="weather-image">
 
-      <!-- Forecast search bar -->
-      <div class="row" ng-include="'views/search-field.html'"></div>
+  <div class="container">
 
-    </div><!-- .jumbotron -->
-  </div>
+    <div class="row">
+      <div class="col-md-8 above-background">
+        <div class="jumbotron ">
+          <h1 class="meteocon" data-icon="H"></h1>
+          <h2>Weather Fore You</h2>
+          <p>Hot 'n' fresh weather forecasts served up daily.</p>
 
-  <!-- Current Weather Block -->
-  <div class="col-md-4" ng-include="'views/current-weather.html'"></div>
-</div>
+          <!-- Forecast search bar -->
+          <div class="row" ng-include="'views/search-field.html'"></div>
 
-
-
-
-
-<div class="row">
-
-  <div class="col-md-7">
-
-    <h3>{{ vm.numDaysToForecast }}-Day Forecast <small><a ng-href="#/">Switch to x-day</a></small></h3>
-
-    <forecast-card ng-repeat="day in vm.forecastDays" forecast="day"></forecast-card>
-
-  </div><!--.forecast-cards-->
-
-  <div class="col-md-5">
-
-    <h3>See the Temps</h3>
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Forecast Hi's and Lo's</h3>
+        </div><!-- .jumbotron -->
       </div>
-      <div class="panel-body">
-        <canvas
-          id="line"
-          class="chart chart-line"
-          chart-data="vm.chart.data"
-          chart-labels="vm.chart.labels"></canvas>
-      </div>
+
+      <!-- Current Weather Block -->
+      <div class="col-md-4" ng-include="'views/current-weather.html'"></div>
     </div>
+  </div><!--.container-->
+</div><!--#weather-image-->
 
-  </div><!--.forecast-chart-->
+<div class="container">
+  <div class="row">
 
-</div><!--.row-->
+    <div class="col-md-7 above-background">
+
+      <h3>{{ vm.numDaysToForecast }}-Day Forecast <small><a ng-href="#/">Switch to x-day</a></small></h3>
+
+      <forecast-card ng-repeat="day in vm.forecastDays" forecast="day"></forecast-card>
+
+    </div><!--.forecast-cards-->
+
+    <div class="col-md-5">
+
+      <h3>See the Temps</h3>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Forecast Hi's and Lo's</h3>
+        </div>
+        <div class="panel-body">
+          <canvas
+            id="line"
+            class="chart chart-line"
+            chart-data="vm.chart.data"
+            chart-labels="vm.chart.labels"></canvas>
+        </div>
+      </div>
+
+    </div><!--.forecast-chart-->
+
+  </div><!--.row-->
+
+</div><!--.container-->

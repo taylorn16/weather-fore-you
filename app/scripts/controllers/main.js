@@ -15,7 +15,7 @@ angular.module('weatherForeYouApp')
 
     $rootScope.page = 'forecasts';
 
-    var _locationId = '';
+    var _locationId = 'ChIJOwg_06VPwokRYv534QaPC8g';     // Privately keep track of the locationID from google
 
     // Update the search results each time the search input is changed
     vm.updateSearchResults = function() {
@@ -50,7 +50,12 @@ angular.module('weatherForeYouApp')
 
     function updatePhoto() {
       photoService.getPhotoUrlById(_locationId).then(function(url) {
-        vm.locationPhotoUrl = url;
+        var imageTarget = $('#weather-image');
+
+        imageTarget.background('unload');
+        imageTarget.background('load', url)
+        imageTarget.background({ source: url });
+
       });
     };
 
@@ -62,7 +67,7 @@ angular.module('weatherForeYouApp')
     }; // updateCurrentWeatherData()
 
     // Init photo url
-    vm.locationPhotoUrl = '';
+    updatePhoto();
 
     // Initialize search results and query
     vm.loadingState = true;

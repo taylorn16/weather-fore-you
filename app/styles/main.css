@@ -19,6 +19,13 @@ body {
 
 /* Custom page header */
 .header {
+  margin-bottom: 0;
+}
+.navbar {
+  margin-bottom: 0;
+}
+#weather-image {
+  padding-top: 2.1em;
 }
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
@@ -42,11 +49,7 @@ body {
 /* Main marketing message and sign up button */
 .jumbotron {
   text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-}
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
+  background-color: rgba(236, 240, 241, 0.8)
 }
 
 /* Supporting marketing content */
@@ -72,7 +75,7 @@ body {
   }
   /* Space out the masthead */
   .header {
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
   }
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
@@ -105,6 +108,11 @@ body {
 
 .current-weather-panel {
   position: relative;
+  background-color: rgba(255, 255, 255, 0.8)
+}
+
+.current-weather-panel .list-group-item {
+  background: none;
 }
 
 .loader-overlay {
@@ -131,4 +139,11 @@ body {
 .forecast-card .lead small {
   position: relative;
   top: -0.5em;
+}
+
+.above-background {
+  z-index: 90;
+}
+.background-content {
+  background: white;
 }
