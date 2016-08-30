@@ -108,4 +108,13 @@ angular.module('weatherForeYouApp')
       true                          // This third argument causes deep object equality to be performed
     );
 
+    $scope.$watch('vm.numDaysToForecast', function handleChange(newNum, oldNum) {
+      // TODO: create loading state/animations to handle this change
+
+      forecastService.getForecast(vm.forecastParams, vm.numDaysToForecast)
+        .then(function(forecastDays) {
+          vm.forecastDays = forecastDays;
+        });
+    });
+
   }]);

@@ -13,10 +13,15 @@ angular.module('weatherForeYouApp')
   .filter('weatherIconFilter',
   ['config', 'weatherCodeService',
   function (config, weatherCodeService) {
-    return function (input) {
+    return function (input, isCurrent) {
+      isCurrent = isCurrent || false;
 
       var cloudLevel = weatherCodeService.getCloudLevel(input),
           hours = (new Date()).getHours();
+
+      if (isCurrent === true) {
+        return config.HUMAN_CODES.ICONS.DAY[cloudLevel];
+      }
 
       if (hours >= 7 && hours <= 19) {                        // If it is daytime (if the sun is up)
         return config.HUMAN_CODES.ICONS.DAY[cloudLevel];

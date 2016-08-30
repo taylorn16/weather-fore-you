@@ -16,8 +16,6 @@
 </div>
 
 
-<img src="{{ vm.locationPhotoUrl }}" width="200" height="200">
-
 
 
 
@@ -25,7 +23,7 @@
 
   <div class="col-md-7">
 
-    <h3>X-Day Forecast <small><a ng-href="#/">Switch to x-day</a></small></h3>
+    <h3>{{ vm.numDaysToForecast }}-Day Forecast <small><a ng-href="#/">Switch to x-day</a></small></h3>
 
     <forecast-card ng-repeat="day in vm.forecastDays" forecast="day"></forecast-card>
 
