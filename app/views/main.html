@@ -33,7 +33,18 @@
 
     <h3>See the Temps</h3>
 
-    <!-- TODO: use angular charts to plot 7-day forecast highs and lows -->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Forecast Hi's and Lo's</h3>
+      </div>
+      <div class="panel-body">
+        <canvas
+          id="line"
+          class="chart chart-line"
+          chart-data="vm.chart.data"
+          chart-labels="vm.chart.labels"></canvas>
+      </div>
+    </div>
 
   </div><!--.forecast-chart-->
 

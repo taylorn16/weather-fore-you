@@ -117,4 +117,21 @@ angular.module('weatherForeYouApp')
         });
     });
 
+    // TODO: make this chart's data interact with the forecast data for real-time updating
+
+    vm.chart = {
+      labels: ['Wednesday', 'Thursday', 'Friday'],
+      series: ['Highs', 'Lows'],
+      data: [
+        [87, 84, 80],
+        [71, 71, 65]
+      ],
+      options: {
+        legend: {
+          display: true,
+          position: 'bottom'
+        }
+      }
+    };
+
   }]);
