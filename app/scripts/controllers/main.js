@@ -9,8 +9,8 @@
  */
 angular.module('weatherForeYouApp')
   .controller('MainCtrl',
-  ['forecastService', '$log', 'cityService', 'config', 'weatherCodeService', '$scope', '$rootScope',
-  function (forecastService, $log, cityService, config, weatherCodeService, $scope, $rootScope) {
+  ['forecastService', 'cityService', 'config', '$scope', '$rootScope',
+  function (forecastService, cityService, config, $scope, $rootScope) {
     var vm = this;
 
     $rootScope.page = 'forecasts';
@@ -56,12 +56,11 @@ angular.module('weatherForeYouApp')
     vm.cityName = config.CITIES.DEFAULTS.name;
     vm.weather = {
       temperature: '-',
-      iconCode: '-',
       apparentTemperature: '-',
-      humidity: '-',
+      humidity: 0,
       date: new Date(),
-      cloudCode: '-',
-      pressure: '-'
+      pressure: '-',
+      cloudCover: 0
     };
     vm.forecastParams = config.FORECAST.DEFAULTS;
     vm.providers = config.FORECAST.PROVIDERS;
@@ -83,15 +82,7 @@ angular.module('weatherForeYouApp')
     // Update all appropriate model values with appropriate modifications
     // and parsings for units and for human-readable purposes
     vm.updateCurrentWeatherData = function(weatherData) {
-      vm.weather = {
-        temperature: weatherData.temperature,
-        iconCode: weatherCodeService.getIconCode(weatherData.cloudCover),
-        apparentTemperature: weatherData.apparentTemperature,
-        humidity: weatherData.humidity * 100,
-        date: new Date(),
-        cloudCode: weatherCodeService.getCloudCode(weatherData.cloudCover),
-        pressure: weatherData.pressure
-      };
+      vm.weather = weatherData;
       vm.loadingState = false;
     };
 

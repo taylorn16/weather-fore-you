@@ -10,7 +10,7 @@
         <span class="current-temp"><strong>{{ vm.weather.temperature | number:0 }}</strong><span class="meteocon" data-icon="+"></span></span><br>
       </div>
       <div class="col-xs-6 text-center">
-        <span class="icon-xl meteocon" data-icon="{{ vm.weather.iconCode }}"></span><br>
+        <span class="icon-xl meteocon" data-icon="{{ vm.weather.cloudCover|weatherIconFilter }}"></span><br>
       </div>
     </div>
 
@@ -19,7 +19,7 @@
         <span class="text-uppercase text-muted">real temp</span>
       </div>
       <div class="col-xs-6 text-center">
-        <span class="text-uppercase text-muted">{{ vm.weather.cloudCode }}</span>
+        <span class="text-uppercase text-muted">{{ vm.weather.cloudCover|weatherCloudsFilter }}</span>
       </div>
     </div>
 
@@ -37,7 +37,7 @@
       Feels Like <span class="pull-right"><strong>{{ vm.weather.apparentTemperature | number:0 }}<sup>o</sup></strong></span>
     </li>
     <li class="list-group-item">
-      Relative Humidity <span class="pull-right"><strong>{{ vm.weather.humidity }}%</strong></span>
+      Relative Humidity <span class="pull-right"><strong>{{ vm.weather.humidity | percentFilter }}%</strong></span>
     </li>
     <li class="list-group-item">
       Pressure <span class="pull-right"><strong>{{ vm.weather.pressure | number:0 }} mbar</strong></span>
