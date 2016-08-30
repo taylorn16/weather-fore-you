@@ -9,11 +9,13 @@
  */
 angular.module('weatherForeYouApp')
   .controller('MainCtrl',
-  ['forecastService', 'cityService', 'config', '$scope', '$rootScope',
-  function (forecastService, cityService, config, $scope, $rootScope) {
+  ['forecastService', 'cityService', 'config', '$scope', '$rootScope', 'photoService',
+  function (forecastService, cityService, config, $scope, $rootScope, photoService) {
     var vm = this;
 
     $rootScope.page = 'forecasts';
+
+    var _locationId = '';
 
     // Update the search results each time the search input is changed
     vm.updateSearchResults = function() {
@@ -29,29 +31,38 @@ angular.module('weatherForeYouApp')
     vm.clearSearch = function() {
       vm.searchQuery = '';
       vm.searchResults = [];
-    };
+    }; // clearSearch()
 
     // Function happens when a user clicks a search result from the city search api
     vm.updateCurrentWeatherByResult = function(result) {
-
       // Update city name & clear search results
       vm.location = result.name;
       vm.searchResults = [];
       vm.searchQuery = result.name;
-
+      _locationId = result.id;
       // Update forecast location in the view model
       cityService.getLatAndLongById(result.id).then(function(location) {
         vm.forecastParams.latitude = location.latitude;
         vm.forecastParams.longitude = location.longitude;
       });
+      updatePhoto();
     }; // updateCurrentWeatherByResult()
+
+    function updatePhoto() {
+      photoService.getPhotoUrlById(_locationId).then(function(url) {
+        vm.locationPhotoUrl = url;
+      });
+    };
 
     // Update all appropriate model values with appropriate modifications
     // and parsings for units and for human-readable purposes
-    vm.updateCurrentWeatherData = function(weatherData) {
+    function updateCurrentWeatherData(weatherData) {
       vm.weather = weatherData;
       vm.loadingState = false;
-    };
+    }; // updateCurrentWeatherData()
+
+    // Init photo url
+    vm.locationPhotoUrl = '';
 
     // Initialize search results and query
     vm.loadingState = true;
@@ -67,7 +78,7 @@ angular.module('weatherForeYouApp')
     // ... and then load up real weather values from default location
     forecastService.getCurrentWeather(vm.forecastParams)
       .then(function(weatherData) {
-        vm.updateCurrentWeatherData(weatherData);
+        updateCurrentWeatherData(weatherData);
     });
 
     // Init the vm's days of forecasting
@@ -78,8 +89,6 @@ angular.module('weatherForeYouApp')
       .then(function(forecastDays) {
         vm.forecastDays = forecastDays;
     });
-
-
 
     // Set up a $watch on the forecastParams and update current
     // weather block as necessary
@@ -93,7 +102,7 @@ angular.module('weatherForeYouApp')
 
         forecastService.getCurrentWeather(vm.forecastParams)
           .then(function(weatherData) {
-            vm.updateCurrentWeatherData(weatherData);
+            updateCurrentWeatherData(weatherData);
         });
       },
       true                          // This third argument causes deep object equality to be performed

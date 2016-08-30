@@ -11,6 +11,7 @@ angular.module('weatherForeYouApp')
   .service('cityService',
   ['$http', 'config', '$log',
   function ($http, config, $log) {
+
     // Gets all API prediction information for a city search by name
     function getCitySearchData(name) {
       return $http({
@@ -19,11 +20,14 @@ angular.module('weatherForeYouApp')
         params: {byName: name}
       })
         .then(function(response) {
-          return response.data.predictions;
+          if (response.data.error_message) {
+            $log.warn(response.data.error_message);
+          }
+          else {
+            return response.data.predictions;
+          }
         })
-        .catch(function(error) {
-          return error.message;
-        });
+        .catch(function(error) { return error.message; });
     };
 
     // Gets all API info about the given city id
@@ -33,14 +37,16 @@ angular.module('weatherForeYouApp')
         url: config.CITIES.ID_API_URL + id
       })
         .then(function(response) {
-          return response.data.result;
+          if (response.error_message) {
+            $log.warn(response.error_message);
+          } else {
+            return response.data.result;
+          }
         })
-        .catch(function(error) {
-          return error.message;
-        });
+        .catch(function(error) { return error.message; });
     };
 
-    // Get only names and IDs of the return predicitions
+    // Get only names and IDs of the returned predicitions
     this.getSearchResultsFor = function(city) {
       return getCitySearchData(city)
         .then(function(predictions) {
@@ -50,9 +56,10 @@ angular.module('weatherForeYouApp')
               id: elem.place_id
             };
           };
+
           return _.map(predictions, getNameAndId);
         });
-    };
+    }; // getSearchResultsFor()
 
     // Get only latitude and longitude of a city by ID
     this.getLatAndLongById = function(id) {
@@ -64,5 +71,13 @@ angular.module('weatherForeYouApp')
             longitude: loc.lng
           };
         });
-    };
+    }; // getLatAndLongById()
+
+    this.getPhotosById = function(id) {
+      return getCityInfoById(id)
+        .then(function(data) {
+          return data.photos;
+        });
+    }; // getPhotosById()
+
   }]);

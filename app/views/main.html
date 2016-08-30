@@ -5,15 +5,18 @@
       <h2>Weather Fore You</h2>
       <p>Hot 'n' fresh weather forecasts served up daily.</p>
 
+      <!-- Forecast search bar -->
       <div class="row" ng-include="'views/search-field.html'"></div>
 
     </div><!-- .jumbotron -->
   </div>
 
+  <!-- Current Weather Block -->
   <div class="col-md-4" ng-include="'views/current-weather.html'"></div>
 </div>
 
 
+<img src="{{ vm.locationPhotoUrl }}" width="200" height="200">
 
 
 

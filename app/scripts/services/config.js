@@ -31,6 +31,9 @@ angular.module('weatherForeYouApp')
     CITIES: {
       SEARCH_API_URL: 'http://chathamweatherapi.azurewebsites.net/api/cities/search',
       ID_API_URL: 'http://chathamweatherapi.azurewebsites.net/api/cities/',
+      PHOTOS: {
+        API_KEY: 'AIzaSyD077HUyCNAttrxo-QxGVlKXhG7G05QgGg'
+      },
       DEFAULTS: {
         name: "New York, NY, United States"
       }
