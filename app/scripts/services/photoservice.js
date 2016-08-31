@@ -25,7 +25,12 @@ angular.module('weatherForeYouApp')
     // Get a photo url by google place reference key
     this.getPhotoUrlById = function(id) {
       return getReferenceById(id).then(function(reference) {
-        return 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=2000&photoreference=' + reference + '&key=' + config.CITIES.PHOTOS.API_KEY;
+        if (reference) {
+          return 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=2000&photoreference=' + reference + '&key=' + config.CITIES.PHOTOS.API_KEY;
+        } else {
+          return 'https://hd.unsplash.com/photo-1462524500090-89443873e2b4';
+        }
+
       });
     };
 

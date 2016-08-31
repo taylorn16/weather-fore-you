@@ -92,7 +92,7 @@ body {
 }
 
 .icon-lg {
-  font-size: 350%;
+  font-size: 200%;
 }
 
 .city-search-bar {
@@ -133,7 +133,7 @@ body {
 }
 
 .forecast-card--temp {
-  font-size: 3em;
+  font-size: 1.5em;
 }
 
 .forecast-card .lead small {

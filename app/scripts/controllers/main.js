@@ -50,6 +50,7 @@ angular.module('weatherForeYouApp')
 
     function updatePhoto() {
       photoService.getPhotoUrlById(_locationId).then(function(url) {
+        console.log(url);
         var imageTarget = $('#weather-image');
 
         imageTarget.background('unload');
