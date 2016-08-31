@@ -90,8 +90,7 @@ angular.module('weatherForeYouApp')
     // Init the vm's days of forecasting
     // Default to 3-day forecast
     vm.forecastDays = [];
-    vm.numDaysToForecast = 3;
-    forecastService.getForecast(vm.forecastParams, vm.numDaysToForecast)
+    forecastService.getForecast(vm.forecastParams, 3)
       .then(function(forecastDays) {
         vm.forecastDays = forecastDays;
     });

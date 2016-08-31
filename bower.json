@@ -11,7 +11,8 @@
     "angular-sanitize": "^1.4.0",
     "angular-touch": "^1.4.0",
     "angular-chart.js": "^1.0.2",
-    "formstone": "^1.2.1"
+    "formstone": "^1.2.1",
+    "animate.css": "^3.5.2"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"
