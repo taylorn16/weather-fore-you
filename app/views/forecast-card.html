@@ -17,8 +17,40 @@
           <strong>{{ vm.temperatureMax | number:0 }}</strong>/<strong>{{ vm.temperatureMin | number:0 }}</strong> <span class="meteocon" data-icon="+"></span>
         </span>
       </div><!--.col-xs-2-->
-    </div>
-  </div>
+    </div><!--.row-->
+
+
+
+  </div><!--.panel-body-->
+
+  <ul class="list-group">
+    <li class="list-group-item">
+      <strong>Feels Like High/Low</strong>
+      <span class="pull-right">
+        {{ vm.apparentTemperatureMax|number:0 }}/{{ vm.apparentTemperatureMin|number:0 }}
+        <span class="meteocon" data-icon="+"></span>
+      </span>
+    </li>
+    <li class="list-group-item">
+      <strong>Humidity</strong>
+      <span class="pull-right">
+        {{ vm.humidity|percentFilter }}%
+      </span>
+    </li>
+    <li class="list-group-item">
+      <strong>Pressure</strong>
+      <span class="pull-right">
+        {{ vm.pressure|number:0 }} mbar
+      </span>
+    </li>
+    <li class="list-group-item">
+      <strong>Cloud Cover</strong>
+      <span class="pull-right">
+        {{ vm.cloudCover|weatherCloudsFilter }}
+      </span>
+    </li>
+  </ul>
+
 </div><!--.forecast-card-->
 
 <!-- TODO: enable expansion of the panel to see details about the forecast for the given day -->

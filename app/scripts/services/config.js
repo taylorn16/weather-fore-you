@@ -56,10 +56,10 @@ angular.module('weatherForeYouApp')
     // Increasing cloud code values denote increasing cloudiness
     HUMAN_CODES: {
       CLOUDS: {
-          '10': 'clear skies',
-          '20': 'partly cloudy',
-          '30': 'cloud cover',
-          '40': 'dense clouds'
+          '10': 'Clear Skies',
+          '20': 'Partly Cloudy',
+          '30': 'Cloud Cover',
+          '40': 'Dense Clouds'
       },
       ICONS: {            // Corresponding icon from the meteocons free set
         NIGHT: {
