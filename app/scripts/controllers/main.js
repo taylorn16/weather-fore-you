@@ -9,8 +9,8 @@
  */
 angular.module('weatherForeYouApp')
   .controller('MainCtrl',
-  ['forecastService', 'cityService', 'config', '$scope', '$rootScope', 'photoService',
-  function (forecastService, cityService, config, $scope, $rootScope, photoService) {
+  ['forecastService', 'cityService', 'config', '$scope', '$rootScope', 'photoService', 'chartService',
+  function (forecastService, cityService, config, $scope, $rootScope, photoService, chartService) {
     var vm = this;
 
     $rootScope.page = 'forecasts';
@@ -90,10 +90,13 @@ angular.module('weatherForeYouApp')
     // Init the vm's days of forecasting
     // Default to 3-day forecast
     vm.forecastDays = [];
-    forecastService.getForecast(vm.forecastParams, 3)
+    vm.numDaysToForecast = 2;
+    vm.chart = {};
+    forecastService.getForecast(vm.forecastParams, vm.numDaysToForecast)
       .then(function(forecastDays) {
         vm.forecastDays = forecastDays;
     });
+
 
     // Set up a $watch on the forecastParams and update current
     // weather block as necessary
@@ -119,24 +122,10 @@ angular.module('weatherForeYouApp')
       forecastService.getForecast(vm.forecastParams, vm.numDaysToForecast)
         .then(function(forecastDays) {
           vm.forecastDays = forecastDays;
+          vm.chart = chartService.getChartOptionsFromForecast(forecastDays);
         });
     });
 
     // TODO: make this chart's data interact with the forecast data for real-time updating
-
-    vm.chart = {
-      labels: ['Wednesday', 'Thursday', 'Friday'],
-      series: ['Highs', 'Lows'],
-      data: [
-        [87, 84, 80],
-        [71, 71, 65]
-      ],
-      options: {
-        legend: {
-          display: true,
-          position: 'bottom'
-        }
-      }
-    };
 
   }]);
