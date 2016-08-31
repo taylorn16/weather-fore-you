@@ -36,10 +36,8 @@
         </div>
 
         <div class="col-xs-6">
-          <select class="form-control" ng-model="vm.numDaysToForecast">
-            <option value="2">2 Days</option>
-            <option value="4">4 Days</option>
-            <option value="6">6 Days</option>
+          <select class="form-control" ng-init="vm.numForecastDays = 2" ng-model="vm.numForecastDays">
+            <option ng-repeat="option in vm.forecastOptions" value="{{ option.value }}">{{ option.name }}</option>
           </select>
         </div>
         <div class="col-xs-6">

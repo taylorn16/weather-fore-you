@@ -80,6 +80,7 @@ angular.module('weatherForeYouApp')
     vm.weather = config.WEATHER.DEFAULTS;
     vm.forecastParams = config.FORECAST.DEFAULTS;
     vm.providers = config.FORECAST.PROVIDERS;
+    vm.forecastOptions = config.FORECAST.OPTIONS;
 
     // ... and then load up real weather values from default location
     forecastService.getCurrentWeather(vm.forecastParams)
@@ -90,9 +91,9 @@ angular.module('weatherForeYouApp')
     // Init the vm's days of forecasting
     // Default to 3-day forecast
     vm.forecastDays = [];
-    vm.numDaysToForecast = 2;
+    vm.numForecastDays = vm.forecastOptions[0].value;
     vm.chart = {};
-    forecastService.getForecast(vm.forecastParams, vm.numDaysToForecast)
+    forecastService.getForecast(vm.forecastParams, vm.numForecastDays)
       .then(function(forecastDays) {
         vm.forecastDays = forecastDays;
     });
@@ -116,10 +117,10 @@ angular.module('weatherForeYouApp')
       true                          // This third argument causes deep object equality to be performed
     );
 
-    $scope.$watch('vm.numDaysToForecast', function handleChange(newNum, oldNum) {
+    $scope.$watch('vm.numForecastDays', function handleChange(newNum, oldNum) {
       // TODO: create loading state/animations to handle this change
 
-      forecastService.getForecast(vm.forecastParams, vm.numDaysToForecast)
+      forecastService.getForecast(vm.forecastParams, vm.numForecastDays)
         .then(function(forecastDays) {
           vm.forecastDays = forecastDays;
           vm.chart = chartService.getChartOptionsFromForecast(forecastDays);

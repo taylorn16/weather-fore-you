@@ -25,6 +25,20 @@ angular.module('weatherForeYouApp')
           name: 'World Weather',
           code: 'WORLD_WEATHER'
         }
+      ],
+      OPTIONS: [
+        {
+          value: 2,
+          name: '2 Days'
+        },
+        {
+          value: 4,
+          name: '4 Days'
+        },
+        {
+          value: 6,
+          name: '6 Days'
+        }
       ]
     },
 
