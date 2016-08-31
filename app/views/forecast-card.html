@@ -1,5 +1,5 @@
 <div class="panel panel-default forecast-card animated fadeIn">
-  <div class="panel-body">
+  <div class="panel-body clearfix">
     <div class="row">
       <div class="col-xs-3">
         <span>
@@ -19,11 +19,14 @@
       </div><!--.col-xs-2-->
     </div><!--.row-->
 
-
+    <button
+      class="btn btn-primary btn-sm pull-right"
+      data-toggle="collapse"
+      data-target="#forecast{{ vm.date }}">Toggle Details</button>
 
   </div><!--.panel-body-->
 
-  <ul class="list-group">
+  <ul class="collapse list-group" id="forecast{{ vm.date }}">
     <li class="list-group-item">
       <strong>Feels Like High/Low</strong>
       <span class="pull-right">
@@ -50,6 +53,8 @@
       </span>
     </li>
   </ul>
+
+
 
 </div><!--.forecast-card-->
 
