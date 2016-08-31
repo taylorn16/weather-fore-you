@@ -58,14 +58,23 @@ angular.module('weatherForeYouApp')
         imageTarget.background({ source: url });
 
       });
-    };
+    }; // updatePhoto()
+
+    function updateForecastCards() {
+      forecastService.getForecast(vm.forecastParams, vm.numForecastDays)
+        .then(function(forecastDays) {
+          vm.forecastDays = forecastDays;
+          vm.chart = chartService.getChartOptionsFromForecast(forecastDays);
+          vm.loadingState = false;
+      });
+    }; // updateForecastCards()
 
     // Update all appropriate model values with appropriate modifications
     // and parsings for units and for human-readable purposes
     function updateCurrentWeatherData(weatherData) {
       vm.weather = weatherData;
-      vm.loadingState = false;
-    }; // updateCurrentWeatherData()
+      vm.loadingState = false;                        // The calls to the forecast card API and this API are the same,
+    }; // updateCurrentWeatherData()                  // so there will only be a minute difference between the load
 
     // Init photo url
     updatePhoto();
@@ -113,20 +122,16 @@ angular.module('weatherForeYouApp')
           .then(function(weatherData) {
             updateCurrentWeatherData(weatherData);
         });
+
+        updateForecastCards();
       },
       true                          // This third argument causes deep object equality to be performed
     );
 
     $scope.$watch('vm.numForecastDays', function handleChange(newNum, oldNum) {
-      // TODO: create loading state/animations to handle this change
+      vm.loadingState = true;
 
-      forecastService.getForecast(vm.forecastParams, vm.numForecastDays)
-        .then(function(forecastDays) {
-          vm.forecastDays = forecastDays;
-          vm.chart = chartService.getChartOptionsFromForecast(forecastDays);
-        });
+      updateForecastCards();
     });
-
-    // TODO: make this chart's data interact with the forecast data for real-time updating
 
   }]);
