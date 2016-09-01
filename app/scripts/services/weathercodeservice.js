@@ -8,7 +8,7 @@
  * Service in the weatherForeYouApp.
  */
 angular.module('weatherForeYouApp')
-  .service('weatherCodeService', [function (config) {
+  .service('weatherCodeService', [function () {
 
     this.getCloudLevel = function(cloudCoverIndex) {
       if (cloudCoverIndex <= 0.25) { return '10'; }

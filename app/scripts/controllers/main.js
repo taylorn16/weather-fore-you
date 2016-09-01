@@ -12,6 +12,7 @@ angular.module('weatherForeYouApp')
   ['forecastService', 'cityService', 'config', '$scope', '$rootScope', 'photoService', 'chartService', 'locationService',
   function (forecastService, cityService, config, $scope, $rootScope, photoService, chartService, locationService) {
     var vm = this;                                       // Prefer use vm for readability and consistency
+    var $ = window.jQuery;
 
     $rootScope.page = 'forecasts';                       // Primitive page-tabbing service implementation
 
@@ -45,6 +46,7 @@ angular.module('weatherForeYouApp')
         vm.forecastParams.latitude = location.latitude;
         vm.forecastParams.longitude = location.longitude;
       });
+      
       updatePhoto();
     }; // updateCurrentWeatherByResult()
 
@@ -53,11 +55,11 @@ angular.module('weatherForeYouApp')
         var imageTarget = $('#weather-image');
 
         imageTarget.background('unload');
-        imageTarget.background('load', url)
+        imageTarget.background('load', url);
         imageTarget.background({ source: url });
 
       });
-    }; // updatePhoto()
+    } // updatePhoto()
 
     function updateForecastCards() {
       forecastService.getForecast(vm.forecastParams, vm.numForecastDays)
@@ -66,14 +68,14 @@ angular.module('weatherForeYouApp')
           vm.chart = chartService.getChartOptionsFromForecast(forecastDays);
           vm.loadingState = false;
       });
-    }; // updateForecastCards()
+    } // updateForecastCards()
 
     // Update all appropriate model values with appropriate modifications
     // and parsings for units and for human-readable purposes
     function updateCurrentWeatherData(weatherData) {
       vm.weather = weatherData;
       vm.loadingState = false;                        // The calls to the forecast card API and this API are the same,
-    }; // updateCurrentWeatherData()                  // so there will only be a minute difference between the load
+    } // updateCurrentWeatherData()                  // so there will only be a minute difference between the load
 
     /*
     * This function handles all the initial setup work of the view-model.
@@ -131,7 +133,7 @@ angular.module('weatherForeYouApp')
         });
         updatePhoto();
       }
-    }; // init()
+    } // init()
 
     // Set up a $watch on the forecastParams and update current
     // weather block as necessary

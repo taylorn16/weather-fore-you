@@ -20,7 +20,7 @@ angular.module('weatherForeYouApp')
           return '';
         }
       });
-    };
+    }
 
     // Get a photo url by google place reference key
     this.getPhotoUrlById = function(id) {

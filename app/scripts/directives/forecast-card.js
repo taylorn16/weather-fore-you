@@ -14,5 +14,5 @@ angular.module('weatherForeYouApp')
       scope: {
         vm: '=forecast'
       }
-      }
+    };
   });

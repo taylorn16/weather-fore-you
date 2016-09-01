@@ -26,7 +26,7 @@ angular.module('weatherForeYouApp')
           vm.currentLocation = address.substring(0, 20) + '...';
         });
       }
-    }; // init()
+    } // init()
 
     init();
 

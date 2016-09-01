@@ -11,6 +11,7 @@
 angular.module('weatherForeYouApp')
   .filter('weatherSourceFilter', ['config', function (config) {
     return function (input) {
+      var _ = window._;
 
       // Find the matching provider index from the config array and get the name back
       return _.find(config.FORECAST.PROVIDERS, function(provider) { return provider.code === input; }).name;

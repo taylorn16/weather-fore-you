@@ -8,8 +8,10 @@
  * Service in the weatherForeYouApp.
  */
 angular.module('weatherForeYouApp')
-  .service('forecastService', ['config', '$log', '$http',
-  function (config, $log, $http) {
+  .service('forecastService', ['config', '$http',
+  function (config, $http) {
+
+    var _ = window._;
 
     // Gets back all the data from the API server
     function getForecastData(forecastParams) {
@@ -26,7 +28,7 @@ angular.module('weatherForeYouApp')
         .catch(function(error) {
           return error.message;
         });
-    };
+    }
 
     // Parses API data for only today's weather
     this.getCurrentWeather = function(forecastParams) {

@@ -9,8 +9,8 @@
  */
 angular.module('weatherForeYouApp')
   .service('chartService',
-  ['$filter', '$log',
-  function ($filter, $log) {
+  ['$filter',
+  function ($filter) {
 
     this.getChartOptionsFromForecast = function(forecastDays) {
       var chartOptions = {
