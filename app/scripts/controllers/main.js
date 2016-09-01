@@ -46,7 +46,7 @@ angular.module('weatherForeYouApp')
         vm.forecastParams.latitude = location.latitude;
         vm.forecastParams.longitude = location.longitude;
       });
-      
+
       updatePhoto();
     }; // updateCurrentWeatherByResult()
 
