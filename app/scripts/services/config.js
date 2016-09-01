@@ -90,7 +90,8 @@ angular.module('weatherForeYouApp')
     },
 
     EVENTS: {
-      SET_LOCATION: 'set_location_event'
+      SET_LOCATION: 'set_location_event',
+      LOCATION_SET: 'location_set_event'
     }
 
   });

@@ -8,12 +8,15 @@
  * Simply an interface layer over the localStorage HTML5 database.
  */
 angular.module('weatherForeYouApp')
-  .service('locationService', function () {
+  .service('locationService', function ($rootScope, config) {
 
     // Access the HTML5 webstorage DB and store the locationId
     this.setLocation = function(locationId) {
       if (localStorage.getItem('locationId') !== locationId) {
-        return localStorage.setItem('locationId', locationId);
+        // Let everyone know that the location was set to a new place
+        localStorage.setItem('locationId', locationId);
+        $rootScope.$broadcast(config.EVENTS.LOCATION_SET);
+        return;
       } else {
         return null;
       }

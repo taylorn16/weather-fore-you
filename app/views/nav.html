@@ -20,7 +20,11 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li ng-show="page === 'forecasts'"><a ng-href="#/" ng-click="vm.triggerSetLocationEvent()"><span class="glyphicon glyphicon-home"></span> Make This My Default Location</a></li>
+        <li ng-show="page === 'forecasts'">
+          <a ng-href="#/" ng-click="vm.triggerSetLocationEvent()">
+            <span class="glyphicon glyphicon-pushpin"></span> Make This My Default Location (Currently {{ vm.currentLocation }})
+          </a>
+        </li>
       </ul>
     </div>
   </div>
