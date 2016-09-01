@@ -11,11 +11,11 @@ angular.module('weatherForeYouApp')
   .controller('MainCtrl',
   ['forecastService', 'cityService', 'config', '$scope', '$rootScope', 'photoService', 'chartService', 'locationService',
   function (forecastService, cityService, config, $scope, $rootScope, photoService, chartService, locationService) {
-    var vm = this;
+    var vm = this;                                       // Prefer use vm for readability and consistency
 
-    $rootScope.page = 'forecasts';
+    $rootScope.page = 'forecasts';                       // Primitive page-tabbing service implementation
 
-    var _locationId = 'ChIJOwg_06VPwokRYv534QaPC8g';     // Privately keep track of the locationID from google
+    var _locationId = '';     // Privately keep track of the locationID from google
 
     // Update the search results each time the search input is changed
     vm.updateSearchResults = function() {
@@ -75,37 +75,62 @@ angular.module('weatherForeYouApp')
       vm.loadingState = false;                        // The calls to the forecast card API and this API are the same,
     }; // updateCurrentWeatherData()                  // so there will only be a minute difference between the load
 
-    // Init photo url
-    updatePhoto();
+    /*
+    * This function handles all the initial setup work of the view-model.
+    * In a perfect world, I would figure out a better way to persist more
+    * data about the user's location so I didn't have to make two API calls
+    * right off the bat.
+    */
+    function init() {
+      // ---
+      // Set up the view-model vars
+      // ---
+      vm.loadingState = true;
+      vm.clearSearch();
+      vm.providers = config.FORECAST.PROVIDERS;
+      vm.forecastOptions = config.FORECAST.OPTIONS;
+      vm.weather = config.WEATHER.DEFAULTS;
+      vm.forecastDays = [];
+      vm.numForecastDays = vm.forecastOptions[0].value;
+      vm.chart = {};
+      vm.forecastParams = config.FORECAST.DEFAULTS;
+      _locationId = config.CITIES.DEFAULTS.locationId;
+      vm.searchQuery = config.CITIES.DEFAULTS.name;
+      vm.location = config.CITIES.DEFAULTS.name;
+      vm.forecastParams = config.FORECAST.DEFAULTS;
 
-    // Initialize search results and query
-    vm.loadingState = true;
-    vm.clearSearch();
-    vm.searchQuery = 'New York, NY, United States';
+      // ---
+      // Make the first API calls with the defaults to get the ball rolling
+      // ---
+      forecastService.getCurrentWeather(vm.forecastParams)
+        .then(function(weatherData) {
+          updateCurrentWeatherData(weatherData);
+      });
+      forecastService.getForecast(vm.forecastParams, vm.numForecastDays)
+        .then(function(forecastDays) {
+          vm.forecastDays = forecastDays;
+      });
+      updatePhoto();
 
-    // Initially apply 'fake' defaults to the view to avoid blank spaces...
-    vm.location = config.CITIES.DEFAULTS.name;
-    vm.weather = config.WEATHER.DEFAULTS;
-    vm.forecastParams = config.FORECAST.DEFAULTS;
-    vm.providers = config.FORECAST.PROVIDERS;
-    vm.forecastOptions = config.FORECAST.OPTIONS;
+      // ---
+      // Change up the view-model and make new API calls if the user stored a location
+      // ---
+      if (locationService.getLocation()) {                    // The user has stored a preffered location
+        // Set private tracker to current location
+        _locationId = locationService.getLocation();
 
-    // ... and then load up real weather values from default location
-    forecastService.getCurrentWeather(vm.forecastParams)
-      .then(function(weatherData) {
-        updateCurrentWeatherData(weatherData);
-    });
-
-    // Init the vm's days of forecasting
-    // Default to 3-day forecast
-    vm.forecastDays = [];
-    vm.numForecastDays = vm.forecastOptions[0].value;
-    vm.chart = {};
-    forecastService.getForecast(vm.forecastParams, vm.numForecastDays)
-      .then(function(forecastDays) {
-        vm.forecastDays = forecastDays;
-    });
-
+        // Get address to put in search query bar and location name
+        cityService.getAddressById(_locationId).then(function(address) {
+          vm.searchQuery = address;
+          vm.location = address;
+        });
+        // Get new forecast lat/lng params
+        cityService.getLatAndLongById(_locationId).then(function(latlng) {
+          vm.forecastParams.latitude = latlng.latitude;
+          vm.forecastParams.longitude = latlng.longitude;
+        });
+      }
+    }; // init()
 
     // Set up a $watch on the forecastParams and update current
     // weather block as necessary
@@ -131,14 +156,24 @@ angular.module('weatherForeYouApp')
     // the number of forecast cards shown without updating the
     // rest of the page.
     $scope.$watch('vm.numForecastDays', function handleChange(newNum, oldNum) {
-      vm.loadingState = true;
-      updateForecastCards();
+      if(newNum === oldNum) {
+        return null;
+      } else {
+        vm.loadingState = true;
+        updateForecastCards();
+        return;
+      }
     });
 
-    // Listen to the $rootScope event for setting location
+    // Listen to the $rootScope event for setting location in order to set the location
+    // with the private tracker var in this controller
     $rootScope.$on(config.EVENTS.SET_LOCATION, function setLocation() {
       locationService.setLocation(_locationId);
     });
 
+    // ---
+    // Init the view-model
+    // ---
+    init();
 
   }]);

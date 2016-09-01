@@ -49,7 +49,8 @@ angular.module('weatherForeYouApp')
         API_KEY: 'AIzaSyD077HUyCNAttrxo-QxGVlKXhG7G05QgGg'
       },
       DEFAULTS: {
-        name: "New York, NY, United States"
+        name: "New York, NY, United States",
+        locationId: 'ChIJOwg_06VPwokRYv534QaPC8g'
       }
     },
 
