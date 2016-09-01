@@ -86,6 +86,10 @@ angular.module('weatherForeYouApp')
         pressure: 0,
         cloudCover: 0
       }
+    },
+
+    EVENTS: {
+      SET_LOCATION: 'set_location_event'
     }
 
   });

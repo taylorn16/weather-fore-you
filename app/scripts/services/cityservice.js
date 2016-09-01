@@ -80,4 +80,11 @@ angular.module('weatherForeYouApp')
         });
     }; // getPhotosById()
 
+    this.getAddressById = function(id) {
+      return getCityInfoById(id)
+        .then(function(data) {
+          return data.formatted_address;
+        });
+    }; // getAddressById()
+
   }]);

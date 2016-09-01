@@ -9,8 +9,8 @@
  */
 angular.module('weatherForeYouApp')
   .controller('MainCtrl',
-  ['forecastService', 'cityService', 'config', '$scope', '$rootScope', 'photoService', 'chartService',
-  function (forecastService, cityService, config, $scope, $rootScope, photoService, chartService) {
+  ['forecastService', 'cityService', 'config', '$scope', '$rootScope', 'photoService', 'chartService', 'locationService',
+  function (forecastService, cityService, config, $scope, $rootScope, photoService, chartService, locationService) {
     var vm = this;
 
     $rootScope.page = 'forecasts';
@@ -50,7 +50,6 @@ angular.module('weatherForeYouApp')
 
     function updatePhoto() {
       photoService.getPhotoUrlById(_locationId).then(function(url) {
-        console.log(url);
         var imageTarget = $('#weather-image');
 
         imageTarget.background('unload');
@@ -128,10 +127,18 @@ angular.module('weatherForeYouApp')
       true                          // This third argument causes deep object equality to be performed
     );
 
+    // Set up a $watch on the number of days to forecast to update
+    // the number of forecast cards shown without updating the
+    // rest of the page.
     $scope.$watch('vm.numForecastDays', function handleChange(newNum, oldNum) {
       vm.loadingState = true;
-
       updateForecastCards();
     });
+
+    // Listen to the $rootScope event for setting location
+    $rootScope.$on(config.EVENTS.SET_LOCATION, function setLocation() {
+      locationService.setLocation(_locationId);
+    });
+
 
   }]);
