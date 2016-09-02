@@ -11,7 +11,8 @@
           class="form-control input-lg"
           placeholder="Enter your city"
           ng-model="vm.searchQuery"
-          ng-change="vm.updateSearchResults()">
+          ng-change="vm.updateSearchResults()"
+          ng-blur="vm.resetSearch()">
         <div class="input-group-btn">
           <button class="btn btn-default" ng-show="vm.searchQuery" ng-click="vm.clearSearch()">&times;</button>
         </div>
@@ -22,6 +23,10 @@
           ng-href="#/"
           ng-click="vm.updateCurrentWeatherByResult(result)"
           class="list-group-item">{{ result.name }}</a>
+      </div><!--.list-group-->
+
+      <div class="list-group" ng-show="vm.searchResults">
+        <a ng-href="#/" ng-click="null" class="list-group-item"><span class="text-danger"><strong>No Search Results</strong></span></a>
       </div><!--.list-group-->
 
     </div><!--.form-group-->

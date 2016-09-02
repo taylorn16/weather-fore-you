@@ -9,8 +9,8 @@
  */
 angular.module('weatherForeYouApp')
   .controller('MainCtrl',
-  ['forecastService', 'cityService', 'config', '$scope', '$rootScope', 'photoService', 'chartService', 'locationService',
-  function (forecastService, cityService, config, $scope, $rootScope, photoService, chartService, locationService) {
+  ['forecastService', 'cityService', 'config', '$scope', '$rootScope', '$timeout', 'photoService', 'chartService', 'locationService',
+  function (forecastService, cityService, config, $scope, $rootScope, $timeout, photoService, chartService, locationService) {
     var vm = this;                                       // Prefer use vm for readability and consistency
     var $ = window.jQuery;
 
@@ -31,14 +31,24 @@ angular.module('weatherForeYouApp')
     // Function happens when a user clears their query to start over
     vm.clearSearch = function() {
       vm.searchQuery = '';
-      vm.searchResults = [];
+      vm.searchResults = null;
     }; // clearSearch()
+
+    // Function fires when a user blurs from the search field mid-search
+    vm.resetSearch = function() {
+      $timeout(function () {
+        vm.searchQuery = vm.location;
+        vm.searchResults = null;
+      }, 500);
+
+      return;
+    };
 
     // Function happens when a user clicks a search result from the city search api
     vm.updateCurrentWeatherByResult = function(result) {
       // Update city name & clear search results
       vm.location = result.name;
-      vm.searchResults = [];
+      vm.searchResults = null;
       vm.searchQuery = result.name;
       _locationId = result.id;
       // Update forecast location in the view model
@@ -84,6 +94,7 @@ angular.module('weatherForeYouApp')
     * right off the bat.
     */
     function init() {
+      _locationId = config.CITIES.DEFAULTS.locationId;
       // ---
       // Set up the view-model vars
       // ---
@@ -96,7 +107,6 @@ angular.module('weatherForeYouApp')
       vm.numForecastDays = vm.forecastOptions[0].value;
       vm.chart = {};
       vm.forecastParams = config.FORECAST.DEFAULTS;
-      _locationId = config.CITIES.DEFAULTS.locationId;
       vm.searchQuery = config.CITIES.DEFAULTS.name;
       vm.location = config.CITIES.DEFAULTS.name;
       vm.forecastParams = config.FORECAST.DEFAULTS;
