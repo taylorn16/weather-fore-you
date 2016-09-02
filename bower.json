@@ -42,7 +42,8 @@
       "main": [
         "dist/js/core.js",
         "dist/js/transition.js",
-        "dist/js/background.js"
+        "dist/js/background.js",
+        "dist/css/background.css"
       ]
     }
   }
